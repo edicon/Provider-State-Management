@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 class MyChart extends StatefulWidget {
   @override
   _MyChartState createState() => _MyChartState();
-
 }
 
 class _MyChartState extends State<MyChart> {
@@ -19,19 +18,30 @@ class _MyChartState extends State<MyChart> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<MySchedule>(
-      builder:(context,schedule,_){
-       return PieChart(
-          dataMap:_createData(schedule.stateManagementValue) ,
-          chartRadius: MediaQuery.of(context).size.width / 1.5,
-          showLegends: false,
-          colorList: colorList,
-        );
-      }
-    );
+    final useProfider = true;
+    if ( useProfider) {
+      final schedule = Provider.of<MySchedule>(context);
+      return PieChart(
+        dataMap: _createData(schedule.stateManagementValue),
+        chartRadius: MediaQuery.of(context).size.width / 1.5,
+        showLegends: false,
+        colorList: colorList,
+      );
+    } else {
+      return Consumer<MySchedule>(
+        builder:(context,schedule,_){
+        return PieChart(
+            dataMap:_createData(schedule.stateManagementValue) ,
+            chartRadius: MediaQuery.of(context).size.width / 1.5,
+            showLegends: false,
+            colorList: colorList,
+          );
+        }
+      );
+    }
   }
 
-  static Map<String, double> _createData(double stateManagementValue){
+  static Map<String, double> _createData(double stateManagementValue) {
     Map<String, double> dataMap = Map();
     dataMap.putIfAbsent("State Management", () => stateManagementValue);
     dataMap.putIfAbsent("UI programming", () => 0.3);
