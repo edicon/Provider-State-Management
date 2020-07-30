@@ -1,4 +1,4 @@
-  
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +17,7 @@ class _MySliderState extends State<MySlider> {
     final schedule=Provider.of<MySchedule>(context);
     return Slider(value: schedule.stateManagementValue,
         onChanged:(value)=>schedule.stateManagementValue=value,);
+        // onChanged:(value)=>schedule.setStateManagementValue(value),);
   }
 
 }

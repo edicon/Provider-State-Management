@@ -8,4 +8,8 @@ class MySchedule extends ChangeNotifier{
     notifyListeners();
   }
 
+  setStateManagementValue(double value){
+    _stateManagementValue=value;
+    notifyListeners();
+  }
 }
